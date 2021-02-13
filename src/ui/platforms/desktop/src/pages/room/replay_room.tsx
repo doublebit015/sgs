@@ -26,6 +26,7 @@ import { Dashboard } from './ui/dashboard/dashboard';
 import { GameBoard } from './ui/gameboard/gameboard';
 import { GameDialog } from './ui/game_dialog/game_dialog';
 import { SeatsLayout } from './ui/seats_layout/seats_layout';
+import { ServerHostTag } from 'props/config_props';
 
 @mobxReact.observer
 export class ReplayRoomPage extends React.Component<
@@ -286,6 +287,7 @@ export class ReplayRoomPage extends React.Component<
               className={styles.roomBanner}
               connectionService={this.props.connectionService}
               onClickSettings={this.onClickSettings}
+              host={ServerHostTag.Localhost}
             />
             <div className={styles.mainBoard}>
               <SeatsLayout

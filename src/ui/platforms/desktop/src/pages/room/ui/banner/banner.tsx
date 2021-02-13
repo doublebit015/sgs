@@ -6,6 +6,7 @@ import { ConnectionService } from 'services/connection_service/connection_servic
 import { Button } from 'ui/button/button';
 import { SignalBar } from 'ui/signal_bar/signal_bar';
 import styles from './banner.module.css';
+import { ServerHostTag } from 'props/config_props';
 
 export type BannerProps = {
   roomName: string;
@@ -13,7 +14,9 @@ export type BannerProps = {
   translator: ClientTranslationModule;
   connectionService: ConnectionService;
   className?: string;
+  defaultPing?: number;
   onClickSettings(): void;
+  host: ServerHostTag;
 };
 
 const BreadCrumb = (props: { content: string[] }) => {
@@ -31,7 +34,7 @@ const BreadCrumb = (props: { content: string[] }) => {
 
 export const Banner = (props: BannerProps) => {
   const history = useHistory();
-  const { roomIndex, roomName, translator } = props;
+  const { roomIndex, host, roomName, translator, defaultPing } = props;
   const breadcrumb = [translator.tr('lobby'), roomName, `${translator.tr('room id')}: ${roomIndex}`];
 
   const onClick = () => {
@@ -49,7 +52,7 @@ export const Banner = (props: BannerProps) => {
           {translator.tr('back to lobby')}
         </Button>
       </div>
-      <SignalBar connectionService={props.connectionService} className={styles.signalBar} />
+      <SignalBar host={host} defaultPing={defaultPing} connectionService={props.connectionService} className={styles.signalBar} />
     </div>
   );
 };
